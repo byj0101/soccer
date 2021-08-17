@@ -1,5 +1,5 @@
 // global import
-import axios from 'axios';
+import axios, {AxiosPromise} from 'axios';
 
 class Config {
   apiKey: string;
@@ -9,9 +9,11 @@ class Config {
     'x-rapidapi-host': string;
   };
 
-  constructor(apiKey: string, endPoint: string) {
+  constructor(apiKey: string, endPoint: string, params?: string) {
+    const additional = params ? endPoint + params : endPoint;
+    const urlPrefix = 'https://api-football-beta.p.rapidapi.com/';
     this.apiKey = apiKey;
-    this.url = 'https://api-football-beta.p.rapidapi.com/' + endPoint;
+    this.url = urlPrefix + additional;
     this.headers = {
       'x-rapidapi-key': apiKey,
       'x-rapidapi-host': 'api-football-beta.p.rapidapi.com',
@@ -21,7 +23,11 @@ class Config {
 
 const apiKey = '';
 
-export const loadData = (): Promise<void> => {
-  const config = new Config(apiKey, 'countries');
-  return axios(config).then(res => console.log(res));
+export const loadData = (): AxiosPromise<any> => {
+  const config = new Config(
+    apiKey,
+    'fixtures',
+    '?league=39&season=2021&from=2021-08-13&to=2021-08-17',
+  );
+  return axios(config);
 };
