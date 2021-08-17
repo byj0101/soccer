@@ -20,5 +20,6 @@ module.exports = {
   rules: {
     noImplicitAny: false,
     noImplicitThis: false,
+    resolveJsonModule: true,
   },
 };
