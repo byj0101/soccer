@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 // local import
-// import {loadData} from '../api';
+// import {loadData} from '../../api';
 import {dummy} from '../../data/home';
 
 const styles = StyleSheet.create({
@@ -46,10 +46,15 @@ const Item = ({item, navigation}: {item: any; navigation: any}) => {
         <Image style={styles.tinyLogo} source={{uri: item.teams.home.logo}} />
         <Text> {item.teams.home.name}</Text>
       </View>
-      <View style={{...styles.item, flex: 0.5, flexDirection: 'row'}}>
-        <Text style={styles.score}> {item.goals.home}</Text>
-        <Text style={styles.score}> {':'}</Text>
-        <Text style={styles.score}> {item.goals.away}</Text>
+      <View>
+        <View style={{...styles.item, flexDirection: 'row'}}>
+          <Text style={styles.score}> {item.goals.home}</Text>
+          <Text style={styles.score}> {':'}</Text>
+          <Text style={styles.score}> {item.goals.away}</Text>
+        </View>
+        <View style={{...styles.item}}>
+          <Text style={styles.score}>{item.fixture.status.short}</Text>
+        </View>
       </View>
       <View style={styles.item}>
         <Image style={styles.tinyLogo} source={{uri: item.teams.away.logo}} />

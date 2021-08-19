@@ -31,3 +31,13 @@ export const loadData = (): AxiosPromise<any> => {
   );
   return axios(config);
 };
+
+export const loadStatistics = (id: number): AxiosPromise<any> => {
+  const config = new Config(apiKey, 'fixtures/statistics', `?fixture=${id}`);
+  return axios(config);
+};
+
+export const loadLineups = (id: number): AxiosPromise<any> => {
+  const config = new Config(apiKey, 'fixtures/lineups', `?fixture=${id}`);
+  return axios(config);
+};
