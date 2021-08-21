@@ -6,58 +6,39 @@ import {
   Text,
   FlatList,
   ActivityIndicator,
-  StyleSheet,
   Image,
 } from 'react-native';
 
 // local import
 // import {loadData} from '../../api';
 import {dummy} from '../../data/home';
+import {defaultStyle} from '../../styles';
+import {homeStyle} from '../../styles/home';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#dfdfdf',
-    flexDirection: 'row',
-    margin: 5,
-    padding: 5,
-    justifyContent: 'space-around',
-  },
-  item: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  score: {
-    fontWeight: 'bold',
-  },
-  tinyLogo: {
-    width: 50,
-    height: 50,
-  },
-});
+const {fwb, fl1, flac, fljc, fldr} = defaultStyle;
+const {container, tinyLogo} = homeStyle;
 
 const Item = ({item, navigation}: {item: any; navigation: any}) => {
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={container}
       onPress={() => navigation.navigate('Details', {data: item})}>
-      <View style={styles.item}>
-        <Image style={styles.tinyLogo} source={{uri: item.teams.home.logo}} />
+      <View style={[fl1, flac, fljc]}>
+        <Image style={tinyLogo} source={{uri: item.teams.home.logo}} />
         <Text> {item.teams.home.name}</Text>
       </View>
       <View>
-        <View style={{...styles.item, flexDirection: 'row'}}>
-          <Text style={styles.score}> {item.goals.home}</Text>
-          <Text style={styles.score}> {':'}</Text>
-          <Text style={styles.score}> {item.goals.away}</Text>
+        <View style={[fl1, flac, fljc, fldr]}>
+          <Text style={fwb}> {item.goals.home}</Text>
+          <Text style={fwb}> {':'}</Text>
+          <Text style={fwb}> {item.goals.away}</Text>
         </View>
-        <View style={{...styles.item}}>
-          <Text style={styles.score}>{item.fixture.status.short}</Text>
+        <View style={[fl1, flac, fljc, fldr]}>
+          <Text style={fwb}>{item.fixture.status.short}</Text>
         </View>
       </View>
-      <View style={styles.item}>
-        <Image style={styles.tinyLogo} source={{uri: item.teams.away.logo}} />
+      <View style={[fl1, flac, fljc]}>
+        <Image style={tinyLogo} source={{uri: item.teams.away.logo}} />
         <Text> {item.teams.away.name}</Text>
       </View>
     </TouchableOpacity>
@@ -81,7 +62,7 @@ const Home: React.FC<{navigation: any}> = ({navigation}) => {
   }
 
   return (
-    <View style={{flex: 1}}>
+    <View style={fl1}>
       <FlatList
         data={data}
         renderItem={renderItem}
